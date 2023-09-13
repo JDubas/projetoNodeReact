@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ListaProdutos } from "../Components/ListaProdutos";
 import { useState } from "react";
 
@@ -8,6 +8,7 @@ export default function EditarProdutos() {
 
   //usando o hook useParams para recuperar o id da rota
   const {id} = useParams();
+  const navigate = useNavigate();
 
 //   const produtoRecuperadoPorId = ListaProdutos.filter((produto)=>{
 //     if(produto.id == parseInt(id)){
