@@ -32,10 +32,6 @@ export default function EditarProdutos() {
     
     }
 
-    const handleChangeProdutoNome = (event) => {
-
-     
-     }
      const handleSubmit = (event) =>{
         event.preventDefault();
     

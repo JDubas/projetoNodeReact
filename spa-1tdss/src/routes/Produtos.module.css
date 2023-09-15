@@ -4,14 +4,15 @@
     margin: auto;
 
     .tableHeader{
-        border: 2px solid #ccc;
+        border: 2px solid #a9a9a9;
         background-color: #ffe4c4;
         text-align: center;
     }
-   & td{
-        border: 2px solid #ccc;
+
+  & td{
+        border: 2px solid #a9a9a9;
         text-align: left;
-    
+
         &:first-child{
             text-align: center;
         }
@@ -19,18 +20,21 @@
             text-align: center;
         }
     }
-    & tr{
+
+   & .tableTr{
         &:nth-child(even){
             background-color: #f0f0f0;
         }
-    
+
         &:hover{
             background-color: #444949;
             color: #fff;
         }
-    
-    }
+
+
+}
 
 }
 
 
+ 
