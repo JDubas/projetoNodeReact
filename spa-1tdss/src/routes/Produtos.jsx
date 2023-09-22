@@ -22,7 +22,9 @@ export default function Produtos() {
         fetch("http://localhost:5000/produtos")
             .then((lista)=> lista.json())
             .then((listaProdutos)=>{
+               
                 setProdutos[listaProdutos];
+                console.log(listaProdutos)
             })
 
     },[]);
@@ -62,19 +64,13 @@ export default function Produtos() {
                             <td>{produto.preco}</td>
                             <td style={{ textAlign: "center" }}>
                                 <Link to={`/editar/produtos/${produto.id}`}>
-                                    {" "}
-                                    <Editar />{" "}
-                                </Link></td>
-                                <td style={{ textAlign: "center" }}>
+                                <Editar /></Link></td>
+                            <td style={{ textAlign: "center" }}>
                                 <Link to={`/excluir/produtos/${produto.id}`}>
-                                    {" "}
-                                    <Excluir />{" "}
-                                </Link></td>
-                                <td style={{ textAlign: "center" }}>
+                                <Excluir /></Link></td>
+                            <td style={{ textAlign: "center" }}>
                                 <Link to={`/adicionar/produtos/${produto.id}`}>
-                                    {" "}
-                                    <IconeAdicionar />{" "}
-                                </Link></td>
+                                <IconeAdicionar/></Link></td>
                         </tr>
                     ))}
                 </tbody>
