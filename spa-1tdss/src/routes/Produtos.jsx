@@ -19,13 +19,15 @@ export default function Produtos() {
     useEffect(()=>{
         console.log("useEffect será renderizado apenas uma vez!")
 
-        fetch("http://localhost:5000/produtos")
-            .then((lista)=> lista.json())
+        fetch("http://localhost:5000/produtos",{
+            method: "GET",
+            headers:{
+                "Content-Type": "application/json"
+            }})
+            .then((response)=> response.json())
             .then((listaProdutos)=>{
-               
                 setProdutos(listaProdutos);
             })
-
     },[]);
 
     useEffect(()=>{
