@@ -23,8 +23,7 @@ export default function Produtos() {
             .then((lista)=> lista.json())
             .then((listaProdutos)=>{
                
-                setProdutos[listaProdutos];
-                console.log(listaProdutos)
+                setProdutos(listaProdutos);
             })
 
     },[]);
