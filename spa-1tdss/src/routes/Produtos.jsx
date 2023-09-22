@@ -5,19 +5,16 @@ import { AiFillEdit as Editar } from "react-icons/ai";
 import { MdDeleteForever as Excluir } from "react-icons/md";
 import { FaPlus as IconeAdicionar } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import ModelInserir from "../Components/ModalInserir/ModalInserir";
 
 export default function Produtos() {
     document.title = "Lista de Produtos";
-    const [counter, setCounter] = useState(0);
-    const [counter2, setCounter2] = useState(0);
+
     const [produtos, setProdutos] = useState([{}])
 
-    useEffect(()=>{
-        console.log("useEffect será renderizado sempre que o componente ou qualquer objeto for atualizado");
-    });
 
     useEffect(()=>{
-        console.log("useEffect será renderizado apenas uma vez!")
+
 
         fetch("http://localhost:5000/produtos",{
             method: "GET",
@@ -30,21 +27,13 @@ export default function Produtos() {
             })
     },[]);
 
-    useEffect(()=>{
-        console.log("useEffect será renderizado apenas se um objeto/variavel/constant que estiver no array de dependencias sofrer uma atualizacao")
-    },[counter2]);
-
+const [open, setOpen] = useState(false)
 
     return (
         <div>
             <h1>Produtos</h1>
-            <div>
-                <button onClick={()=>{setCounter(counter + 1)}}>Counter - {counter}</button> 
-            </div> 
-
-            <div>
-                <button onClick={()=>{setCounter2(counter2 + 1)}}>Counter - {counter2}</button> 
-            </div> 
+           {open ? <ModelInserir open={open} setOpen={setOpen}/> : ""}
+<button onClick={()=> setOpen(true)}>Open - Modal</button>
             <table className={styles.table}>
                 <thead>
                     <tr>
