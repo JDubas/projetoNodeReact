@@ -11,29 +11,42 @@ export default function Produtos() {
     document.title = "Lista de Produtos";
 
     const [produtos, setProdutos] = useState([{}])
-
+    const [open, setOpen] = useState(false)
 
     useEffect(()=>{
 
+        if (!open) {
+            carregarProdutos()
+        }
+    },[open]);
 
-        fetch("http://localhost:5000/produtos",{
-            method: "GET",
-            headers:{
-                "Content-Type": "application/json"
-            }})
-            .then((response)=> response.json())
-            .then((listaProdutos)=>{
-                setProdutos(listaProdutos);
-            })
-    },[]);
+const deletar = (id) => {
+    console.log(id);
+    fetch(`http://localhost:5000/produtos/${id}`,{
+        method: "DELETE",
+        headers:{
+            "Content-Type": "application/json"
+        }
+    })
+    carregarProdutos();
 
-const [open, setOpen] = useState(false)
-
+}
+const carregarProdutos = () => {
+    fetch("http://localhost:5000/produtos",{
+        method: "GET",
+        headers:{
+            "Content-Type": "application/json"
+        }})
+        .then((response)=> response.json())
+        .then((listaProdutos)=>{
+            setProdutos(listaProdutos);
+        })
+}
     return (
         <div>
             <h1>Produtos</h1>
            {open ? <ModelInserir open={open} setOpen={setOpen}/> : ""}
-<button onClick={()=> setOpen(true)}>Open - Modal</button>
+{/* <button onClick={()=> setOpen(true)}>Open - Modal</button> */}
             <table className={styles.table}>
                 <thead>
                     <tr>
@@ -42,7 +55,7 @@ const [open, setOpen] = useState(false)
                         <th className={styles.tableHeader}>{"   "}Preço{"   "}</th>
                         <th className={styles.tableHeader}>{"   "}Editar{"   "}</th>
                         <th className={styles.tableHeader}>{"   "}Excluir{"   "}</th>
-                        <th className={styles.tableHeader}>{"   "}Adicionar{"   "}</th>
+                        {/* <th className={styles.tableHeader}>{"   "}Adicionar{"   "}</th> */}
   
                     </tr>
                 </thead>
@@ -56,11 +69,11 @@ const [open, setOpen] = useState(false)
                                 <Link to={`/editar/produtos/${produto.id}`}>
                                 <Editar /></Link></td>
                             <td style={{ textAlign: "center" }}>
-                                <Link to={`/excluir/produtos/${produto.id}`}>
+                                <Link onClick={() => {deletar(produto.id)}}>
                                 <Excluir /></Link></td>
-                            <td style={{ textAlign: "center" }}>
+                            {/* <td style={{ textAlign: "center" }}>
                                 <Link to={`/adicionar/produtos/${produto.id}`}>
-                                <IconeAdicionar/></Link></td>
+                                <IconeAdicionar/></Link></td> */}
                         </tr>
                     ))}
                 </tbody>
@@ -69,8 +82,8 @@ const [open, setOpen] = useState(false)
                         <td colSpan={3} style={{ textAlign: "center" }}>
                             PRODUTOS
                         </td>
-                        <td colSpan={3} style={{ textAlign: "center" }} >
-                            <Link to="/adicionar/produtos/novo">
+                        <td colSpan={2} style={{ textAlign: "center" }} >
+                            <Link onClick={()=> setOpen(true)}>
                                 <IconeAdicionar />
                             </Link>
                         </td>
